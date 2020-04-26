@@ -1,8 +1,0 @@
-<div class="columns">
-  <div class="column is-one-third">
-    <app-word-form (resultEmitter)="getFormResult($event)"></app-word-form>
-  </div>
-  <div *ngIf="result?.word" class="column is-two-thirds">
-    <app-word-result [formResult]="result"></app-word-result>
-  </div>
-</div>
