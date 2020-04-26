@@ -1,0 +1,28 @@
+<div class="box">
+  <form (ngSubmit)="onSubmit()" [formGroup]="wordForm">
+    <div class="field">
+      <label class="label is-large" for="textString">Your string</label>
+      <div class="control">
+        <input [ngClass]="{'input is-large': true, 'is-danger': formHasEmptyStringError()}" type="text"
+               id="textString"
+               formControlName="textString">
+      </div>
+      <p class="help is-danger" *ngIf="formHasEmptyStringError()">Please include characters</p>
+    </div>
+    <div class="field">
+      <label class="label is-medium" for="dictionaryLanguage">Dictionary</label>
+      <div class="control">
+        <div class="select">
+          <select id="dictionaryLanguage" formControlName="dictionaryLanguage">
+            <option *ngFor="let lang of dictionaryLanguages" [ngValue]="lang">
+            {{lang.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="control">
+      <button type="submit" [disabled]="!wordForm.valid" class="button is-dark">Find</button>
+    </div>
+  </form>
+</div>
