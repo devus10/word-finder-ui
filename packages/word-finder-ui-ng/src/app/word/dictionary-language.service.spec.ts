@@ -1,41 +1,39 @@
 import {TestBed} from '@angular/core/testing';
-import { WordService } from './word.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {DictionaryLanguage} from './dictionary-language.dto';
+import {DictionaryLanguageService} from './dictionary-language.service';
 import {EnvironmentService} from '../environment.service';
 
-describe('WordService', () => {
-  let service: WordService;
-  let envService: EnvironmentService;
+describe('DictionaryLanguageService', () => {
+  let service: DictionaryLanguageService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [WordService, {provide: EnvironmentService, useClass: EnvironmentServiceStub}]
+      providers: [DictionaryLanguageService, {provide: EnvironmentService, useClass: EnvironmentServiceStub}]
     });
 
-    service = TestBed.inject(WordService);
+    service = TestBed.inject(DictionaryLanguageService);
     httpMock = TestBed.inject(HttpTestingController);
-    envService = TestBed.inject(EnvironmentService);
   });
 
   afterEach(() => {
     httpMock.verify();
   });
 
-  it('should return word', () => {
-    const response = {
-      textString: 'word',
-      existsInDictionary: true,
-      dictionaryAnagrams: ['word']
-    };
+  it('should return dictionary languages', () => {
+    const response = [
+      {
+        name: 'Polish',
+        code: 'pl'
+      }
+    ];
 
-    service.getWord({code: 'en'} as DictionaryLanguage, 'word').subscribe((res) => {
+    service.getLanguages().subscribe((res) => {
       expect(res).toEqual(response);
     });
 
-    const req = httpMock.expectOne('http://url/words/en:word');
+    const req = httpMock.expectOne('http://url/dictionary-languages');
     expect(req.request.method).toBe('GET');
     req.flush(response);
   });

@@ -4,6 +4,6 @@
     <ng-template #notExists>does not exist</ng-template>
     in {{formResult.selectedLanguage}} dictionary.
   </p>
-  <p *ngIf="wordHasAnagrams(); else noAnagrams">Anagrams: {{formattedAnagrams()}}</p>
+  <p *ngIf="wordHasAnagrams(); else noAnagrams">Anagrams:{{formattedAnagrams()}}</p>
   <ng-template #noAnagrams>No anagrams found.</ng-template>
 </div>

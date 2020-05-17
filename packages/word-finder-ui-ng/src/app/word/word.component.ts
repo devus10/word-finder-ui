@@ -10,7 +10,6 @@ export class WordComponent {
   result: Result;
 
   getFormResult(result: Result) {
-    console.log(result);
     this.result = result;
   }
 }
